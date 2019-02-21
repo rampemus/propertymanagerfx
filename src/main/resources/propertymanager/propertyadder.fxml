@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="700.0" maxWidth="800.0" minHeight="600.0" minWidth="600.0" prefHeight="700.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertymanager.AddPropertyController">
+   <right>
+      <BorderPane prefWidth="200.0">
+         <top>
+            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
+               <children>
+                  <StackPane prefHeight="300.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9d7e4" height="300.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+                        <ImageView fx:id="kuva" fitHeight="284.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true">
+                           <StackPane.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </StackPane.margin>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <HBox spacing="4.0">
+                     <children>
+                        <BorderPane>
+                           <bottom>
+                              <Label text="Kuva:" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="4.0" />
+                                 </BorderPane.margin>
+                              </Label>
+                           </bottom>
+                        </BorderPane>
+                        <TextField fx:id="tiedosto" />
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#browseImage" text="Vaihda">
+                           <HBox.margin>
+                              <Insets left="4.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </BorderPane.margin>
+            </VBox>
+         </top>
+      </BorderPane>
+   </right>
+   <top>
+      <Label alignment="CENTER" text="Asunnon lisäys" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="8.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <VBox>
+         <children>
+            <Label text="Kohteen nimi:" />
+            <TextField fx:id="nimi" maxWidth="400.0" />
+            <Label text="Osoite:" />
+            <TextField fx:id="osoite" maxWidth="400.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="32.0" />
+            <Label prefHeight="16.0" prefWidth="123.0" text="Rakennusvuosi:" />
+            <TextField fx:id="rakennusvuosi" maxWidth="400.0" />
+            <Label text="Neliömäärä:" />
+            <HBox spacing="4.0">
+               <children>
+                  <TextField fx:id="neliomaara" />
+                  <BorderPane>
+                     <bottom>
+                        <Label text="m²" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="4.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </bottom>
+                  </BorderPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Label text="Vuokra:" />
+            <HBox spacing="4.0">
+               <children>
+                  <TextField fx:id="vuokra" />
+                  <BorderPane>
+                     <bottom>
+                        <Label text="€" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="4.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </HBox>
+            <Label text="Muut ehdot:" />
+            <TextField fx:id="muutehdot" maxWidth="400.0" />
+            <Label text="Kuntoluokitus:" />
+            <ChoiceBox fx:id="kuntoluokitus" prefWidth="180.0" />
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="32.0" />
+            <Label text="Kohteen kuvaus:" />
+            <TextArea fx:id="kohteenkuvaus" maxWidth="400.0" />
+            <Label text="Ilmoittajan sähköposti:" />
+            <TextField fx:id="sahkoposti" maxWidth="400.0" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" maxHeight="26.0" minHeight="26.0" prefHeight="26.0" spacing="8.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <Button id="lisaysnappi" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addProperty" text="Lisää asunto" />
+            <Button id="peruutusnappi" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#cancelPropertyAdd" text="Peruuta" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</BorderPane>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="700.0" maxWidth="800.0" minHeight="600.0" minWidth="600.0" prefHeight="700.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertymanager.PropertySearchController">
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" maxHeight="26.0" minHeight="26.0" prefHeight="26.0" spacing="8.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <Label fx:id="tulostieto" text="Tuloksia: n kpl" />
+            <Label text="Eteneminen:" />
+            <ProgressBar fx:id="eteneminen" prefWidth="200.0" progress="0.0" />
+            <Button mnemonicParsing="false" onAction="#generateApartments" text="Generoi asuntoja" />
+            <Button id="lisaysnappi" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#searchProperty" text="Etsi" />
+            <Button id="peruutusnappi" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#cancelPropertyAdd" text="Sulje" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+   <top>
+      <VBox spacing="32.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="750.0" text="Asuntojen haku">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="16.0">
+               <children>
+                  <VBox prefWidth="360.0">
+                     <children>
+                        <Label text="Kohteen nimi:" />
+                        <TextField fx:id="nimi" maxWidth="400.0" />
+                        <Label text="Osoite:" />
+                        <TextField fx:id="osoite" maxWidth="400.0" />
+                        <Label prefHeight="16.0" prefWidth="123.0" text="Rakennusvuosi:" />
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="rakennusvuosi1" maxWidth="400.0">
+                                 <HBox.margin>
+                                    <Insets right="8.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <BorderPane>
+                                 <bottom>
+                                    <Label text="-" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="4.0" right="8.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </bottom>
+                              </BorderPane>
+                              <TextField fx:id="rakennusvuosi2" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="360.0">
+                     <children>
+                        <Label text="Neliömäärä:" />
+                        <HBox spacing="4.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="neliomaara1">
+                                       <HBox.margin>
+                                          <Insets right="8.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <BorderPane>
+                                       <bottom>
+                                          <Label text="-" BorderPane.alignment="CENTER">
+                                             <BorderPane.margin>
+                                                <Insets bottom="4.0" right="8.0" />
+                                             </BorderPane.margin>
+                                          </Label>
+                                       </bottom>
+                                    </BorderPane>
+                                    <TextField fx:id="neliomaara2" />
+                                 </children>
+                              </HBox>
+                              <BorderPane>
+                                 <bottom>
+                                    <Label minWidth="-Infinity" prefWidth="22.0" text="m²" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="4.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </bottom>
+                              </BorderPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <Label text="Vuokra:" />
+                        <HBox spacing="4.0">
+                           <children>
+                              <TextField fx:id="vuokra1" />
+                              <BorderPane>
+                                 <bottom>
+                                    <Label text="-" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="4.0" left="4.0" right="4.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </bottom>
+                              </BorderPane>
+                              <TextField fx:id="vuokra2" />
+                              <BorderPane>
+                                 <bottom>
+                                    <Label minWidth="-Infinity" prefWidth="22.0" text="€" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="4.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </bottom>
+                              </BorderPane>
+                           </children>
+                        </HBox>
+                        <Label text="Kuntoluokitus:" />
+                        <ChoiceBox fx:id="kuntoluokitus" prefWidth="180.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="16.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <content>
+            <TilePane fx:id="tulokset" hgap="8.0" vgap="8.0" />
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
