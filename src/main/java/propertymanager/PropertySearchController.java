@@ -48,7 +48,7 @@ public class PropertySearchController {
 
     @FXML
     void cancelPropertyAdd(ActionEvent event) {
-
+        MainApp.appState.set(AppState.MainMenu);
     }
 
     @FXML

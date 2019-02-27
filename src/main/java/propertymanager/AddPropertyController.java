@@ -54,7 +54,7 @@ public class AddPropertyController {
 
     @FXML
     void cancelPropertyAdd(ActionEvent event) {
-
+        MainApp.appState.set(AppState.MainMenu);
     }
 
 }
