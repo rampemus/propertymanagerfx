@@ -1,5 +1,8 @@
 package propertymanager;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -11,9 +14,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MainApp extends Application {
     // https://openjfx.io/javadoc/11/javafx.graphics/javafx/application/Application.html
@@ -49,7 +57,7 @@ public class MainApp extends Application {
         AddPropertyController adderController = adderLoader.getController();
         PropertySearchController searcherController = searchLoader.getController();
 
-        // Create menu
+        // Create menu with animation in the label
         Button addPropertyButton = new Button("+ property");
         addPropertyButton.setOnMouseClicked(e -> {
             appState.setValue(AppState.AddingProperty);
@@ -62,10 +70,28 @@ public class MainApp extends Application {
         exitButton.setOnMouseClicked(e -> {
             appState.setValue(AppState.Exit);
         });
-        VBox menu = new VBox(10,addPropertyButton,propertySearchButton,exitButton);
+        //Animation!
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyy/MMM/dd HH:mm:ss");
+        String emoji = "xD";
+        Label dateLabel = new Label("animation has not started");
+
+        KeyValue keyValueTime = new KeyValue(dateLabel.textProperty(),timeFormatter.format(LocalDateTime.now()));
+        KeyValue keyValueEmoji = new KeyValue(dateLabel.textProperty(), emoji);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(1000),keyValueTime,keyValueEmoji);
+
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setAutoReverse(true);
+        timeline.getKeyFrames().addAll(keyFrame);
+        timeline.play();
+
+        //everything in VBox
+        VBox menu = new VBox(10,addPropertyButton,propertySearchButton,exitButton, dateLabel);
         menu.setAlignment(Pos.CENTER);
         menu.setPrefHeight(800);
         menu.setPrefWidth(600);
+
+
 
         /*Toteuta myös pää/valikkoikkunaan reaktiivinen animaatio siten,
          että va- likon alle tulostetaan kaksivaiheinen ikuisesti toistuva

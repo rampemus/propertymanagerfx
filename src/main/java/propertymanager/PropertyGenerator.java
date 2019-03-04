@@ -1,20 +1,23 @@
-package propertymanager.apuja;
+package propertymanager;
 
-import propertymanager.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PropertyGenerator {
-    private final ArrayList<Property> asuntoLista = new ArrayList<>();
+    private final ObservableList<Property> asuntoLista = FXCollections.observableArrayList();
     private final Object lock = new Object();
     private int tehtäviäAsuntoja = 0;
     private int tehtyjäAsuntoja = 0;
 
     // lisää listaan vanhat
     public PropertyGenerator(ArrayList<Property> oldList) {
-        asuntoLista.addAll(oldList);
+        if ( oldList != null) {
+            asuntoLista.addAll(oldList);
+        }
     }
 
     // säieturvallinen, sisäinen rajapinta
@@ -48,9 +51,9 @@ public class PropertyGenerator {
     }
 
     // säieturvallinen
-    public List<Property> annaAsunnot() {
+    public ObservableList<Property> annaAsunnot() {
         synchronized (lock) {
-            return new ArrayList<>(asuntoLista);
+            return asuntoLista;
         }
     }
 
@@ -76,7 +79,7 @@ public class PropertyGenerator {
         int rakennusvuosi = 1850 + new Random().nextInt(170);
 
         return new Property(
-                new Main().getClass().getResource("house" + (1 + new Random().nextInt(6)) + ".png").toExternalForm(),
+                "house" + (1 + new Random().nextInt(6)) + ".png", //uses now relative path
                 random(etuetu) + random(etu) + random(taka).toLowerCase() + " " + random(rappu) + " " + new Random().nextInt(100),
                 random(kaikki) + random(tie) + " " + (1 + new Random().nextInt(200)),
                 rakennusvuosi,
@@ -100,7 +103,7 @@ public class PropertyGenerator {
             while (tehtyjäAsuntoja() < tehtäviäAsuntoja()) {
                 lisääAsunto(luo());
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(50);
                 } catch (Exception e) {
                 }
 

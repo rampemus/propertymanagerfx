@@ -1,4 +1,4 @@
-package propertymanager.apuja;
+package propertymanager;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Property {
         this.kohteenKuvaus = kohteenKuvaus;
         this.sähköposti = sähköposti;
         this.kuntoluokitus = kuntoluokitus;
-        System.out.println("DEBUG: " + this + " lisätty.");
+//        System.out.println("DEBUG: " + this + " lisätty.");
     }
 
     public String getKuvaTiedosto() {
@@ -101,7 +101,7 @@ public class Property {
 
     public String toString() {
         return
-                nimi + "\n" +
+//                nimi + "\n" +
                 "Osoite: " + osoite + "\n" +
                 "Rakennettu: " + rakennusvuosi + "\n" +
                 "Koko: " + neliömäärä + "m^2\n" +

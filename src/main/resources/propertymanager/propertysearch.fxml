@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="700.0" maxWidth="800.0" minHeight="600.0" minWidth="600.0" prefHeight="700.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertymanager.PropertySearchController">
+<BorderPane maxHeight="700.0" maxWidth="957.0" minHeight="600.0" minWidth="600.0" prefHeight="700.0" prefWidth="957.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertymanager.PropertySearchController">
    <bottom>
       <HBox alignment="CENTER_RIGHT" maxHeight="26.0" minHeight="26.0" prefHeight="26.0" spacing="8.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
@@ -21,7 +21,7 @@
             <Label text="Eteneminen:" />
             <ProgressBar fx:id="eteneminen" prefWidth="200.0" progress="0.0" />
             <Button mnemonicParsing="false" onAction="#generateApartments" text="Generoi asuntoja" />
-            <Button id="lisaysnappi" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#searchProperty" text="Etsi" />
+            <Button id="lisaysnappi" fx:id="search" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Etsi" />
             <Button id="peruutusnappi" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#cancelPropertyAdd" text="Sulje" />
          </children>
          <BorderPane.margin>
@@ -35,7 +35,7 @@
    <top>
       <VBox spacing="32.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="750.0" text="Asuntojen haku">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="950.0" text="Asuntojen haku">
                <font>
                   <Font size="24.0" />
                </font>
@@ -148,7 +148,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <content>
-            <TilePane fx:id="tulokset" hgap="8.0" vgap="8.0" />
+            <TilePane fx:id="tulokset" hgap="8.0" prefHeight="447.0" prefWidth="804.0" vgap="8.0" />
          </content>
       </ScrollPane>
    </center>

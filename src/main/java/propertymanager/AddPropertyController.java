@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 
 public class AddPropertyController {
 
+    static PropertyGenerator writableData;
+
     @FXML
     private ImageView kuva;
 
@@ -41,6 +43,11 @@ public class AddPropertyController {
 
     @FXML
     private TextField sahkoposti;
+
+    public static void initData(PropertyGenerator data) {
+        writableData = data;
+        System.out.println("Data initialized");
+    }
 
     @FXML
     void addProperty(ActionEvent event) {

@@ -6,6 +6,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Controller for property card
+ */
 public class SearchResultController {
 
     @FXML

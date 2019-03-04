@@ -9,10 +9,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertymanager.SearchResultController">
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertymanager.SearchResultController">
    <center>
-      <StackPane onMouseEntered="#activate" onMouseExited="#deactivate" BorderPane.alignment="CENTER">
+      <StackPane onMouseEntered="#activate" onMouseExited="#deactivate" prefHeight="200.0" prefWidth="177.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle fx:id="tausta" arcHeight="5.0" arcWidth="5.0" fill="#c9d7e4" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
             <ImageView fx:id="kuva" fitHeight="184.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true">
@@ -31,8 +30,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="kuvaus" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" text="Label" />
-            <Label fx:id="kuvaus2" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="64.0" prefWidth="200.0" text="Label" wrapText="true" />
+            <Label fx:id="kuvaus2" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Label" wrapText="true" />
          </children>
       </VBox>
    </bottom>
