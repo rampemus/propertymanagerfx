@@ -77,6 +77,8 @@ public class PropertySearchController {
         propertyNodes = new HashMap<>();
 
         initListeners();
+
+        initFilters();
     }
 
     @FXML
@@ -86,7 +88,61 @@ public class PropertySearchController {
 
     @FXML
     void generateApartments(ActionEvent event) {
+        generator.luoAsuntoja(20);
+    }
 
+    private void initListeners() {
+        updateFilterOnKeyTyped(nimi, osoite, rakennusvuosi1, rakennusvuosi2, neliomaara1, neliomaara2, vuokra1, vuokra2);
+
+        search.setOnMouseClicked(e -> {
+            for ( int i = 0; i < filteredData.size(); i++) {
+                System.out.println(filteredData.get(i).getNimi());
+            }
+        });
+
+        //update tulostieto
+        filteredData.addListener(new ListChangeListener<Property>() {
+            @Override
+            public void onChanged(Change<? extends Property> change) {
+                Platform.runLater(new Runnable() {
+                    @Override public void run() {
+                        tulostieto.setText("Tuloksia: " + filteredData.size() + " kpl");
+                    }
+                });
+
+            }
+        });
+
+        data.addListener(new ListChangeListener<Property>() {
+            @Override
+            public void onChanged(Change<? extends Property> c) {
+                while (c.next()) {
+                    //only checks if something is added, doesn't understand if property is removed
+                    for ( int i = c.getFrom(); i < c.getTo(); i++) {
+                        Property added = data.get(i);
+                        System.out.println("There is new property called: " + added.getNimi());
+
+                        Platform.runLater(new Runnable() {
+                            @Override public void run() {
+                                addPropertyCardToTulokset(added);
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    private void initFilters() {
+        TextFieldFilter.setIntegerFilter(rakennusvuosi1);
+        TextFieldFilter.setIntegerFilter(rakennusvuosi2);
+        TextFieldFilter.setFloatNumberFilter(neliomaara1);
+        TextFieldFilter.setFloatNumberFilter(neliomaara2);
+        TextFieldFilter.setIntegerFilter(vuokra1);
+        TextFieldFilter.setIntegerFilter(vuokra2);
     }
 
     private void addPropertyCardToTulokset(Property p) {
@@ -108,6 +164,13 @@ public class PropertySearchController {
 
             tulokset.getChildren().add(propertyCard);
 
+            /**
+             * When filtered data is changed the propertyCard needs
+             * to hide itself. When propertyCard is visible again
+             * it will pop back to top of the list.
+             *  As a side effect this will also order the propertyCards
+             * into filteredData's reverse order for future use...
+             */
             filteredData.addListener(new ListChangeListener<Property>() {
                 @Override
                 public void onChanged(Change<? extends Property> change) {
@@ -133,16 +196,52 @@ public class PropertySearchController {
     }
 
     private boolean searchResultFilter(Property property) {
-        if (property.getNimi().toLowerCase().contains(nimi.getText().toLowerCase())) {
-            return true;
+        if (nimiResultFilter(property) && osoiteResultFilter(property)) {
+            try {
+                if ( rakennusvuosiFilter(property)
+                        && vuokraFilter(property)
+                        && neliomaaraFilter(property)) {
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+                return false;
+            }
         }
         return false;
     }
 
-    private void hideAllPropertyCards() {
-        Collection<Node> cards = propertyNodes.values();
-        for ( Node card : cards) {
-            card.setVisible(false);
+    private boolean nimiResultFilter(Property property ) {
+        return nimi.getText().length() == 0 || property.getNimi().toLowerCase().contains(nimi.getText().toLowerCase());
+    }
+
+    private boolean osoiteResultFilter(Property property) {
+        return osoite.getText().length() == 0 || property.getOsoite().toLowerCase().contains(osoite.getText().toLowerCase());
+    }
+
+    private boolean rakennusvuosiFilter(Property property) {
+        return (rakennusvuosi1.getText().length() == 0 || property.getRakennusvuosi() > Integer.parseInt(rakennusvuosi1.getText()))
+                && (rakennusvuosi2.getText().length() == 0 || property.getRakennusvuosi() < Integer.parseInt(rakennusvuosi2.getText()));
+    }
+
+    private boolean neliomaaraFilter(Property property) {
+        return (neliomaara1.getText().length() == 0 || property.getNeliömäärä() > Float.parseFloat(neliomaara1.getText()))
+                && (neliomaara2.getText().length() == 0 || property.getNeliömäärä() < Float.parseFloat(neliomaara2.getText()));
+    }
+
+    private boolean vuokraFilter(Property property) {
+        return (vuokra1.getText().length() == 0 || property.getVuokra() > Integer.parseInt(vuokra1.getText()))
+                && (vuokra2.getText().length() == 0 || property.getVuokra() < Integer.parseInt(vuokra2.getText()));
+    }
+
+    /**
+     * makes filteredData to update itself on keytyped
+     * @param textFields all textfields that need to be reactive
+     */
+    private void updateFilterOnKeyTyped(TextField... textFields) {
+        for ( int i = 0; i < textFields.length; i++) {
+            textFields[i].setOnKeyTyped(e -> {
+                filteredData.setPredicate(property -> searchResultFilter(property));
+            });
         }
     }
 }
