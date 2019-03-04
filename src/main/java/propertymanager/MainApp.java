@@ -71,7 +71,7 @@ public class MainApp extends Application {
         exitButton.setOnMouseClicked(e -> {
             appState.setValue(AppState.Exit);
         });
-        
+
         //Animation!
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyy/MMM/dd HH:mm:ss");
         String hymiö = "xD";
@@ -93,18 +93,6 @@ public class MainApp extends Application {
         menu.setAlignment(Pos.CENTER);
         menu.setPrefHeight(800);
         menu.setPrefWidth(600);
-
-
-
-        /*Toteuta myös pää/valikkoikkunaan reaktiivinen animaatio siten,
-         että va- likon alle tulostetaan kaksivaiheinen ikuisesti toistuva
-         animaatio, jossa ensimmäinen, kahden sekunnin pituinen vaihe tulostaa
-         kellonajan, ja toi- nen, sekunnin pituinen vaihe tulostaa hymiön tai
-         jonkin muun valitsemasi merkkijonon. Animaatiolla ei ole muita
-         vaiheita. Toki jos haluat, voit lisätä animaatioon harrastuneisuuden
-         mukaan muutakin sisältöä.
-        Animaatio-API https://openjfx.io/javadoc/11/javafx.graphics/javafx/animation/package-summary.html
-        Oleellisia luokkia: esim. KeyFrame, TimeLine, DateTimeFormatter, LocalDateTime*/
 
         //init appState enum
         StackPane main = new StackPane(menu, adder, searcher);
