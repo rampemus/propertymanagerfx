@@ -1,5 +1,6 @@
 package propertymanager;
 
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -70,18 +71,20 @@ public class MainApp extends Application {
         exitButton.setOnMouseClicked(e -> {
             appState.setValue(AppState.Exit);
         });
+        
         //Animation!
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyy/MMM/dd HH:mm:ss");
-        String emoji = "xD";
+        String hymiö = "xD";
         Label dateLabel = new Label("animation has not started");
-
-        KeyValue keyValueTime = new KeyValue(dateLabel.textProperty(),timeFormatter.format(LocalDateTime.now()));
-        KeyValue keyValueEmoji = new KeyValue(dateLabel.textProperty(), emoji);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(1000),keyValueTime,keyValueEmoji);
-
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), actionEvent -> {
+            if ( dateLabel.getText().contains(hymiö)) {
+                dateLabel.setText(timeFormatter.format(LocalDateTime.now()));
+            } else {
+                dateLabel.setText(hymiö);
+            }
+        });
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.setAutoReverse(true);
         timeline.getKeyFrames().addAll(keyFrame);
         timeline.play();
 
